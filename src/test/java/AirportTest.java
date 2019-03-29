@@ -20,11 +20,11 @@ public class AirportTest {
         plane = new Plane(PlaneType.DREAMLINER, Airline.KLM);
         passenger = new Passenger("Mark", 400);
         flight = new Flight(plane, "SNT23 22", "London");
-        hangar = new Hangar("Purple", 4, true);
         hangarTwo = new Hangar("Green", 3, false);
+        hangar = new Hangar("Purple", 4, true);
         hangars = new ArrayList<>();
-        hangars.add(hangar);
         hangars.add(hangarTwo);
+        hangars.add(hangar);
         airport = new Airport("AMST", hangars);
 
     }
@@ -40,8 +40,32 @@ public class AirportTest {
     }
 
     @Test
+    public void canAllocatePlanesToVacantHangars() {
+        airport.parkPlaneInHangar(plane);
+        assertEquals(1, hangarTwo.totalPlanes());
+    }
+
+    @Test
+    public void cannotAllocatePlanesToFullHangar() {
+        airport.parkPlaneInHangar(plane);
+        airport.parkPlaneInHangar(plane);
+        airport.parkPlaneInHangar(plane);
+        airport.parkPlaneInHangar(plane);
+        assertEquals(3, hangarTwo.totalPlanes());
+    }
+
+    @Test
+    public void canAllocatePlaneFromHanger() {
+        airport.parkPlaneInHangar(plane);
+        airport.parkPlaneInHangar(plane);
+        Plane plane = airport.chosePlaneForFlight();
+        assertEquals("KLM", plane.airline());
+    }
+
+    @Test
     public void canCreateFlight() {
-        Flight newFlight = airport.createFlight(plane, "SNT23 22", "Stanstead");
+        airport.parkPlaneInHangar(plane);
+        Flight newFlight = airport.createFlight( "SNT23 22", "Stanstead");
         assertEquals(flight.number(), newFlight.number());
     }
 

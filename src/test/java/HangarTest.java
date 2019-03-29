@@ -43,7 +43,7 @@ public class HangarTest {
     public void canRemovePlaneFromHangar() {
         hangar.parkPlane(plane);
         hangar.parkPlane(plane);
-        hangar.planeReadyForBoarding(plane);
+        hangar.planeReadyForBoarding();
         assertEquals(1, hangar.totalPlanes());
     }
 
