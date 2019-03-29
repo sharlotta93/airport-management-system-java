@@ -15,22 +15,25 @@ public class Hangar {
     }
 
     public String name() {
-        return this.name;
+        return name;
     }
 
     public int capacity() {
-        return this.capacity;
+        return capacity;
     }
 
     public int totalPlanes() {
-        return this.planes.size();
+        return planes.size();
     }
 
     public boolean isVacant() {
-        if (capacity() > totalPlanes()) {
-            return true;
+        return (capacity() > totalPlanes()); //shortcut for if statement
+    }
+
+    public void parkPlane(Plane plane) {
+        if (isVacant() == true) {
+            planes.add(plane);
         }
-        return false;
     }
 
 
