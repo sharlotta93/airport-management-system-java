@@ -84,6 +84,32 @@ public class AirportTest {
         assertEquals(30, passenger.totalCash());
     }
 
+    @Test
+    public void canTrackTicketsSold() {
+        airport.sellTicket(flight, passenger);
+        airport.sellTicket(flight, passenger);
+        airport.sellTicket(flight, passenger);
+        assertEquals(3, airport.totalTicketsSold(flight));
+    }
 
+    @Test
+    public void canTrackTicketsSoldForIndividualFlights() {
+        Flight flightTwo = new Flight(plane, "BRS23 00", "Brussels", 100);
+        airport.sellTicket(flightTwo, passenger);
+        airport.sellTicket(flightTwo, passenger);
+        airport.sellTicket(flight, passenger);
+        assertEquals(1, airport.totalTicketsSold(flight));
+        assertEquals(2, airport.totalTicketsSold(flightTwo));
+    }
+
+    @Test
+    public void cannotSellTicketsForFullFlight() {
+        Plane privateJet = new Plane(PlaneType.TEST, Airline.NORWEGIANAIRSHUTTLE);
+        Flight newFlight = new Flight(privateJet, "NYC6 66", "NYC", 30000);
+        Passenger passenger = new Passenger("Mr Robot", 50000);
+        airport.sellTicket(newFlight, passenger);
+        airport.sellTicket(newFlight, passenger);
+        assertEquals(1, airport.totalTicketsSold(newFlight));
+    }
 
 }

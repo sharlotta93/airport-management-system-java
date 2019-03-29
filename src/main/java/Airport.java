@@ -54,4 +54,8 @@ public class Airport {
     public void sellTicket(Flight flight, Passenger passenger) {
         flight.sellTicket(passenger);
     }
+
+    public int totalTicketsSold(Flight flight) {
+        return flight.ticketsSold();
+    }
 }

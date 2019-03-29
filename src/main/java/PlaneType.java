@@ -3,7 +3,8 @@ public enum PlaneType {
         DOUGLASMD(176),
         DREAMLINER(244),
         BOEING(366),
-        AIRBUS(566);
+        AIRBUS(566),
+        TEST(1);
 
         private final int capacity;
 
