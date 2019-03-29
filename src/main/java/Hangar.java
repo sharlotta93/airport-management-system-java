@@ -36,5 +36,9 @@ public class Hangar {
         }
     }
 
+    public Plane planeReadyForBoarding(Plane plane) {
+        return planes.remove(0);  //will have to change that later for more specific index
+    }
+
 
 }
