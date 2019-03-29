@@ -44,10 +44,14 @@ public class Airport {
     public Plane chosePlaneForFlight() {
         Hangar hangar = findFullestHangar();
             return hangar.planeReadyForBoarding();
-        }
+    }
 
     public Flight createFlight(String number, String destination) {
         Plane plane = chosePlaneForFlight();
-        return new Flight(plane, number, destination);
+        return new Flight(plane, number, destination, 50);
+    }
+
+    public void sellTicket(Flight flight, Passenger passenger) {
+        flight.sellTicket(passenger);
     }
 }

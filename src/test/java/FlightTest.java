@@ -13,7 +13,7 @@ public class FlightTest {
     public void before() {
         plane = new Plane(PlaneType.DREAMLINER, Airline.KLM);
         passenger = new Passenger("Mark", 400);
-        flight = new Flight(plane, "ENV34 120", "London");
+        flight = new Flight(plane, "ENV34 120", "London", 75);
 
     }
 
@@ -39,7 +39,8 @@ public class FlightTest {
 
     @Test
     public void canHaveSoldTickets() {
-        flight.sellTicket();
+        flight.sellTicket(passenger);
         assertEquals(1, flight.ticketsSold());
+        assertEquals(325, passenger.totalCash());
     }
 }

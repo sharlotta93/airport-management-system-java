@@ -19,7 +19,7 @@ public class AirportTest {
     public void before() {
         plane = new Plane(PlaneType.DREAMLINER, Airline.KLM);
         passenger = new Passenger("Mark", 400);
-        flight = new Flight(plane, "SNT23 22", "London");
+        flight = new Flight(plane, "SNT23 22", "London", 50);
         hangarTwo = new Hangar("Green", 3, false);
         hangar = new Hangar("Purple", 4, true);
         hangars = new ArrayList<>();
@@ -68,5 +68,22 @@ public class AirportTest {
         Flight newFlight = airport.createFlight( "SNT23 22", "Stanstead");
         assertEquals(flight.number(), newFlight.number());
     }
+
+    @Test
+    public void canSellTicket() {
+        airport.sellTicket(flight, passenger);
+        assertEquals(1, flight.ticketsSold());
+        assertEquals(350, passenger.totalCash());
+    }
+
+    @Test
+    public void cannotSellTicketNotEnoughCash() {
+        Passenger passenger = new Passenger("Justina", 30);
+        airport.sellTicket(flight, passenger);
+        assertEquals(0, flight.ticketsSold());
+        assertEquals(30, passenger.totalCash());
+    }
+
+
 
 }
