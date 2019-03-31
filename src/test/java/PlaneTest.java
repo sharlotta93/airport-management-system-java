@@ -42,5 +42,19 @@ public class PlaneTest {
         plane.addPassenger(passenger);
         assertEquals(1, plane.totalPassengers());
     }
+//
+//    @Test
+//    public void canFindPassenger() {
+//        Passenger passenger2 = new Passenger("Vivian", 6000);
+//        Passenger passenger3 = new Passenger("Bob", 300);
+//        Passenger passenger4 = new Passenger("Daniel", 300);
+//        plane.addPassenger(passenger2);
+//        plane.addPassenger(passenger3);
+//        plane.addPassenger(passenger3);
+//        plane.addPassenger(passenger2);
+//        plane.addPassenger(passenger4);
+//        Passenger wantedPassenger = plane.findPassenger("Mark");
+//        assertEquals("Mark", wantedPassenger);
+//    }
 
 }
