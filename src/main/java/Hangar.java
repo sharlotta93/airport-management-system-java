@@ -4,13 +4,11 @@ public class Hangar {
 
     private int capacity;
     private String name;
-    private boolean vacant;
     private ArrayList<Plane> planes;
 
-    public Hangar(String name, int capacity, boolean vacant) {
+    public Hangar(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
-        this.vacant = vacant;
         this.planes = new ArrayList<>();
     }
 
@@ -31,14 +29,31 @@ public class Hangar {
     }
 
     public void parkPlane(Plane plane) {
-        if (isVacant() == true) {
+        if (isVacant()) {
             planes.add(plane);
         }
     }
 
-    public Plane planeReadyForBoarding() {
-        return planes.remove(0);  //will have to change that later for more specific index
+    public Plane removePlaneFromHangar(int size) {
+        if (planes.size() == 0) return null; //if hangar is empty return null
+
+        Plane bestPlane = null;
+
+        for (int i = 0; i < planes.size(); i++) {
+            Plane currentPlane = planes.get(i);
+            if (currentPlane.capacity() >= size) {
+                if (bestPlane == null || currentPlane.capacity() < bestPlane.capacity()) {
+                    bestPlane = currentPlane;
+                }
+            }
+        }
+        planes.remove(bestPlane);
+        return bestPlane;
     }
 
-
 }
+
+
+
+
+

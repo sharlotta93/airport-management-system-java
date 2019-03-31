@@ -11,7 +11,7 @@ public class HangarTest {
     @Before
     public void before() {
         plane = new Plane(PlaneType.DREAMLINER, Airline.KLM);
-        hangar = new Hangar("Blue", 5, true);
+        hangar = new Hangar("Blue", 5);
 
     }
 
@@ -33,7 +33,7 @@ public class HangarTest {
 
     @Test
     public void cannotAddPlaneWhenAtCapacity() {
-        Hangar hangarTwo = new Hangar("Green", 1, true);
+        Hangar hangarTwo = new Hangar("Green", 1);
         hangarTwo.parkPlane(plane);
         hangarTwo.parkPlane(plane);
         assertEquals(1, hangarTwo.totalPlanes());
@@ -41,10 +41,12 @@ public class HangarTest {
 
     @Test
     public void canRemovePlaneFromHangar() {
+        Plane planeTwo = new Plane(PlaneType.AIRBUS, Airline.AEROFLOT);
+        hangar.parkPlane(planeTwo);
         hangar.parkPlane(plane);
-        hangar.parkPlane(plane);
-        hangar.planeReadyForBoarding();
+        Plane wantedPlane = hangar.removePlaneFromHangar(244);
         assertEquals(1, hangar.totalPlanes());
+        assertEquals(PlaneType.DREAMLINER, wantedPlane.type());
     }
 
 

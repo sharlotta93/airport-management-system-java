@@ -20,8 +20,8 @@ public class AirportTest {
         plane = new Plane(PlaneType.DREAMLINER, Airline.KLM);
         passenger = new Passenger("Mark", 400);
         flight = new Flight(plane, "SNT23 22", "London", 50);
-        hangarTwo = new Hangar("Green", 3, false);
-        hangar = new Hangar("Purple", 4, true);
+        hangarTwo = new Hangar("Green", 3);
+        hangar = new Hangar("Purple", 4);
         hangars = new ArrayList<>();
         hangars.add(hangarTwo);
         hangars.add(hangar);
@@ -58,14 +58,14 @@ public class AirportTest {
     public void canAllocatePlaneFromHanger() {
         airport.parkPlaneInHangar(plane);
         airport.parkPlaneInHangar(plane);
-        Plane plane = airport.chosePlaneForFlight();
+        Plane plane = airport.findBestPlaneForFlight(244);
         assertEquals("KLM", plane.airline());
     }
 
     @Test
     public void canCreateFlight() {
         airport.parkPlaneInHangar(plane);
-        Flight newFlight = airport.createFlight( "SNT23 22", "Stanstead");
+        Flight newFlight = airport.createFlight( "SNT23 22", "Stanstead", 244);
         assertEquals(flight.number(), newFlight.number());
     }
 

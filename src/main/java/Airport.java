@@ -30,24 +30,26 @@ public class Airport {
         }
     }
 
-    public Hangar findFullestHangar() {
-        Hangar fullestHangar = this.hangars.get(0);
-        for (int i=1 ; i < this.hangars.size() ; i++) {
+    public Plane findBestPlaneForFlight(int wantedCapacity) {
+        Plane bestPlane = null;
+        for (int i = 0; i < this.hangars.size(); i++) {
             Hangar hangar = this.hangars.get(i);
-            if (hangar.totalPlanes() > fullestHangar.totalPlanes()) {
-                fullestHangar = hangar;
+            Plane plane = hangar.removePlaneFromHangar(wantedCapacity);
+            if (plane != null) {
+               if (bestPlane == null) {
+                    bestPlane = plane;
+                } else if (plane.capacity() == wantedCapacity) {
+                 return plane;
+                }
+
             }
         }
-        return fullestHangar;
+        return bestPlane;
     }
+    
 
-    public Plane chosePlaneForFlight() {
-        Hangar hangar = findFullestHangar();
-            return hangar.planeReadyForBoarding();
-    }
-
-    public Flight createFlight(String number, String destination) {
-        Plane plane = chosePlaneForFlight();
+    public Flight createFlight(String number, String destination, int size) {
+        Plane plane = findBestPlaneForFlight(size);
         return new Flight(plane, number, destination, 50);
     }
 
