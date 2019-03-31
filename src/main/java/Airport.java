@@ -38,7 +38,7 @@ public class Airport {
             if (plane != null) {
                if (bestPlane == null) {
                     bestPlane = plane;
-                } else if (plane.capacity() == wantedCapacity) {
+                } else if (plane.capacity() > wantedCapacity && plane.capacity() < bestPlane.capacity()) {
                  return plane;
                 }
 
@@ -46,7 +46,12 @@ public class Airport {
         }
         return bestPlane;
     }
-    
+
+    public Plane findSecondBestPlaneForFlight(int wantedCapacity) {
+        Plane bestPlane = findBestPlaneForFlight(wantedCapacity);
+        return findBestPlaneForFlight(bestPlane.capacity() + 1); //will always return the next bigger one, so if there is 2 planes of the same size if will skip it.
+
+    }
 
     public Flight createFlight(String number, String destination, int size) {
         Plane plane = findBestPlaneForFlight(size);

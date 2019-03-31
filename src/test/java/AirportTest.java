@@ -55,11 +55,22 @@ public class AirportTest {
     }
 
     @Test
-    public void canAllocatePlaneFromHanger() {
+    public void canAllocateBestPlaneFromHanger() {
+        Plane newPlane = new Plane(PlaneType.BOEING, Airline.BRITISHAIRWAYS);
+        airport.parkPlaneInHangar(newPlane);
         airport.parkPlaneInHangar(plane);
         airport.parkPlaneInHangar(plane);
         Plane plane = airport.findBestPlaneForFlight(244);
         assertEquals("KLM", plane.airline());
+    }
+
+    @Test
+    public void canAllocateSecondBestPlaneFromHanger() {
+        Plane newPlane = new Plane(PlaneType.BOEING, Airline.BRITISHAIRWAYS);
+        airport.parkPlaneInHangar(plane);
+        airport.parkPlaneInHangar(newPlane);
+        Plane wantedPlane = airport.findSecondBestPlaneForFlight(244);
+        assertEquals(366, wantedPlane.capacity());
     }
 
     @Test
