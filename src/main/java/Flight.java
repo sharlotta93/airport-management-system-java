@@ -5,7 +5,7 @@ public class Flight {
     private Plane plane;
     private String number;
     private String destination;
-    private ArrayList tickets;
+    private ArrayList<Integer> tickets;
     private int price;
 
     public Flight(Plane plane, String number, String destination, int price) {
@@ -25,11 +25,11 @@ public class Flight {
     }
 
     public String destination() {
-        return this.destination;
+        return destination;
     }
 
     public int ticketsSold() {
-        return this.tickets.size();
+        return tickets.size();
     }
 
     public int totalSeatsAvailable() {
@@ -40,7 +40,8 @@ public class Flight {
     public void sellTicket(Passenger passenger) {
         if (ticketsSold() < totalSeatsAvailable()) {
             if (passenger.totalCash() > this.price) {
-                this.tickets.add(1);
+                tickets.add(1);
+                plane.addPassenger(passenger);
                 passenger.pay(this.price);
             }
         }

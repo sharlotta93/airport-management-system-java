@@ -9,15 +9,15 @@ public class Passenger {
     }
 
     public String name() {
-        return this.name;
+        return name;
     }
 
     public int totalCash() {
-        return this.wallet;
+        return wallet;
     }
 
     public void pay(int price) {
-        this.wallet -= price;
+        wallet -= price;
     }
 
 }

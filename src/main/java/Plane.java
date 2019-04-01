@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Plane {
 
@@ -16,7 +14,7 @@ public class Plane {
     }
 
     public PlaneType type() {
-        return this.type;
+        return type;
     }
 
     public int capacity() {
@@ -24,11 +22,11 @@ public class Plane {
     }
 
     public String airline() {
-        return this.airline.getName();
+        return airline.getName();
     }
 
     public int totalPassengers() {
-        return this.passengers.size();
+        return passengers.size();
     }
 
     public void addPassenger(Passenger passenger) {
